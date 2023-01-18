@@ -1,0 +1,32 @@
+--- # Install server in different OS
+- hosts: all
+  user: ec2-user
+  become: yes
+  connection: ssh
+  tasks:
+    - name: Add group
+      group:
+        name: playgroup
+        state: present
+    - name: Add user
+      user: 
+        name: mack
+        state: present
+        group: playgroup
+    - name: Install server on linux
+      yum: 
+        pkg: httpd
+        state: present
+    - name: start service
+      service: 
+        name: httpd
+        state: started
+    - name: enable service
+      service: 
+        name: httpd
+        state: reloaded
+    - name: create index file
+      copy:
+        content: "Configure server by using ansible in terraform!"
+        dest: "/var/www/html/index.html"
+
