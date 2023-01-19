@@ -14,10 +14,18 @@ pipeline {
                 sh 'terraform init'
             }
         }
-        stage('terraform apply') {
+        stage('test AWS credentials') {
+            steps {
+                withAWS(credentials: 'AKIAT3VV3VFKWD4FDPWA') {
+                    sh 'terraform plan'
+                }
+            }
+        }
+        stage('terraform plan') {
             steps{
                 sh 'terraform plan'
             }
         }
     }
 }
+
