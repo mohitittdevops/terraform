@@ -16,7 +16,7 @@ pipeline {
         }
         stage('test AWS credentials') {
             steps {
-                withAWS(credentials: 'd6ff9dfc-6cda-4d1e-a8c8-c47b785e178b') {
+                withAWS(credentials: 'd6ff9dfc-6cda-4d1e-a8c8-c47b785e178b' , region: 'us-east-1') {
                     sh 'terraform plan'
                 }
             }
