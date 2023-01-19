@@ -4,16 +4,16 @@ pipeline {
        terraform 'terraform'
     }
     stages {
-        stage('terraform format check') {
-            steps{
-                sh 'terraform fmt'
-            }
-        }
-        stage('terraform Init') {
-            steps{
-                sh 'terraform init'
-            }
-        }
+        // stage('terraform format check') {
+        //     steps{
+        //         sh 'terraform fmt'
+        //     }
+        // }
+        // stage('terraform Init') {
+        //     steps{
+        //         sh 'terraform init'
+        //     }
+        // }
         // stage('test AWS credentials') {
         //     steps {
         //         withAWS(credentials: 'd6ff9dfc-6cda-4d1e-a8c8-c47b785e178b' , region: 'us-east-1') {
@@ -21,9 +21,11 @@ pipeline {
         //         }
         //     }
         // }
-        stage('test AWS credentials') {
+        stage('terraform Commands') {
             steps {
                 withAWS(credentials: 'd6ff9dfc-6cda-4d1e-a8c8-c47b785e178b' , region: 'us-east-1') {
+                    sh 'terraform fmt'
+                    sh 'terraform init'
                     sh 'terraform apply --auto-approve'
                 }
             }
