@@ -26,7 +26,8 @@ pipeline {
                 withAWS(credentials: 'd6ff9dfc-6cda-4d1e-a8c8-c47b785e178b' , region: 'us-east-1') {
                     sh 'terraform fmt'
                     sh 'terraform init'
-                    sh 'terraform apply --auto-approve'
+                    //sh 'terraform apply --auto-approve'
+                    sh 'terraform destroy --auto-approve'
                 }
             }
         }
