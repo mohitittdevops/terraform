@@ -14,16 +14,18 @@ pipeline {
                 sh 'terraform init'
             }
         }
+        // stage('test AWS credentials') {
+        //     steps {
+        //         withAWS(credentials: 'd6ff9dfc-6cda-4d1e-a8c8-c47b785e178b' , region: 'us-east-1') {
+        //             sh 'terraform plan'
+        //         }
+        //     }
+        // }
         stage('test AWS credentials') {
             steps {
                 withAWS(credentials: 'd6ff9dfc-6cda-4d1e-a8c8-c47b785e178b' , region: 'us-east-1') {
-                    sh 'terraform plan'
+                    sh 'terraform apply --auto-approve'
                 }
-            }
-        }
-        stage('terraform plan') {
-            steps{
-                sh 'terraform plan'
             }
         }
     }
